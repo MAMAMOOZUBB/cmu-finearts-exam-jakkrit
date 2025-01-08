@@ -1,3 +1,13 @@
+1.Clone GIT
+
+2.นำไฟล์ไปวางในไฟล์ web server จำลอง (เช่น "C:\xampp\htdocs\cmu-finearts-exam-jakkrit")
+
+3.สร้างฐานข้อมูล จากโค้ด SQL ด้านล่าง
+
+4.Run http://localhost/cmu-finearts-exam-jakkrit/login.html
+
+5.Login หรือ Register เพื่อเข้าใช้งาน ^^
+
 DB --------------------------------------------->>>
 
 CREATE DATABASE cmu_test;
