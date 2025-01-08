@@ -54,7 +54,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <textarea name="content" class="form-control" rows="5" required><?php echo $article['content']; ?></textarea>
             </div>
             <button type="submit" class="btn btn-primary">บันทึก</button>
-            <a href="index.php" class="btn btn-secondary">ยกเลิก</a>
+            <a href="blogs.php" class="btn btn-secondary">ยกเลิก</a>
         </form>
     </div>
 </body>

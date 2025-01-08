@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $stmt->store_result();
 
     if ($stmt->num_rows == 1) {
-        $stmt->bind_result($id, $hashed_password);
+        $stmt->bind_result($id, $fetched_username, $hashed_password);
         $stmt->fetch();
 
         // ตรวจสอบรหัสผ่าน
