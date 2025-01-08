@@ -30,6 +30,7 @@ $result = $conn->query($sql);
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
+
 </head>
 
 <body>
@@ -65,6 +66,14 @@ $result = $conn->query($sql);
                                         <td><?php echo htmlspecialchars($row['title']); ?></td>
                                         <td><?php echo $row['created_at']; ?></td>
                                         <td>
+                                            <button type="button"
+                                                class="btn btn-info btn-sm open-read-modal"
+                                                data-title="<?php echo htmlspecialchars($row['title']); ?>"
+                                                data-content="<?php echo htmlspecialchars($row['content']); ?>"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#readModal">
+                                                อ่าน
+                                            </button>
                                             <a href="edit.php?id=<?php echo $row['id']; ?>" class="btn btn-warning btn-sm">แก้ไข</a>
                                             <button type="button"
                                                 class="btn btn-danger btn-sm open-delete-modal"
@@ -132,6 +141,28 @@ $result = $conn->query($sql);
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ยกเลิก</button>
                                     <a href="#" class="btn btn-danger" id="confirmDeleteBtn">ลบ</a>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Modal Content in article -->
+                    <div class="modal fade" id="readModal" tabindex="-1" aria-labelledby="readModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="readModalLabel">เนื้อหาบทความ</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+
+                                <div class="modal-body">
+                                    <h1 id="modalArticleTitle" class="fs-4 mb-3"></h1>
+                                    <hr>
+                                    <p id="modalArticleContent" class="mb-0"></p>
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ปิด</button>
+                                </div>
 
                             </div>
                         </div>
@@ -145,6 +176,7 @@ $result = $conn->query($sql);
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+
     <script>
         $(document).ready(function() {
             $('#dataTable').DataTable({
@@ -184,6 +216,32 @@ $result = $conn->query($sql);
             });
         });
     </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+
+            const readButtons = document.querySelectorAll('.open-read-modal');
+
+            const modalArticleTitle = document.getElementById('modalArticleTitle');
+            const modalArticleContent = document.getElementById('modalArticleContent');
+
+            readButtons.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const articleTitle = btn.getAttribute('data-title');
+                    const articleContent = btn.getAttribute('data-content');
+
+
+                    console.log('Title:', articleTitle);
+                    console.log('Content:', articleContent);
+
+
+                    modalArticleTitle.textContent = articleTitle;
+                    modalArticleContent.textContent = articleContent;
+                });
+            });
+        });
+    </script>
+
 
 </body>
 
